@@ -32,7 +32,7 @@ function environment(t) {
 
 test('top-row keys work on AZERTY and QWERTY, numpad too', () => {
   assert.equal(keyToDigit({key: '6', code: 'Digit6'}), '6');
-  assert.equal(keyToDigit({key: '-', code: 'Digit6'}), '6'); // AZERTY without Shift
+  assert.equal(keyToDigit({key: '-', code: 'Digit6'}), '6');
   assert.equal(keyToDigit({key: 'è', code: 'Digit7'}), '7');
   assert.equal(keyToDigit({key: '7', code: 'Numpad7'}), '7');
   assert.equal(keyToDigit({key: 'a', code: 'KeyA'}), null);

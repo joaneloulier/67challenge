@@ -17,7 +17,7 @@ export function newGame() {
     status: 'waiting',
     score: 0,
     remaining: DURATION,
-    pose: '7',     // the character starts on the "seven" picture
+    pose: '7',     
     expected: '6',
     endReason: null,
     wrongKey: null,
@@ -26,7 +26,6 @@ export function newGame() {
 
 // A key was pressed ('6' or '7'). Returns a NEW state; `previous` is untouched.
 export function press(previous, key) {
-  if (key == 'Enter') return ;
   if (key !== '6' && key !== '7') return previous;
   if (previous.status === 'over') return previous;
 

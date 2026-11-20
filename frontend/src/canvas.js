@@ -1,5 +1,3 @@
-// Browser side of the game: drawing on the Canvas, reading the keyboard and
-// running the requestAnimationFrame loop. The rules live in game.js.
 import {HEIGHT, WIDTH, newGame, press, tick} from './game.js';
 
 export const CHARACTERS = {
@@ -21,7 +19,7 @@ export function picturePath(character, pose) {
 }
 
 // Starts loading the two pictures of a character. A picture that is missing or
-// still loading is replaced by a drawn placeholder (see drawCharacter).
+// still loading is replaced by a drawn placeholder.
 export function loadPictures(character) {
   const pictures = {};
   for (const pose of ['6', '7']) {
@@ -50,6 +48,7 @@ const font = (size, bold = false) => `${bold ? 'bold ' : ''}${size}px ${FONT}`;
 // Where the character goes: centred, between the HUD and the hint line.
 const BOX = {w: 300, h: 500, x: (WIDTH - 300) / 2, y: 70};
 
+// pas très importante mais au cas où l'image casse
 function drawCharacter(context, state, view) {
   const picture = view.pictures?.[state.pose];
   const ready = picture && picture.complete && picture.naturalWidth > 0;
@@ -122,7 +121,7 @@ export function draw(context, state, view = {}) {
   context.textAlign = 'center';
   context.font = font(24);
   context.fillStyle = COLORS.muted;
-  const hintY = HEIGHT - 28; // below the character box
+  const hintY = HEIGHT - 28;
   if (state.status === 'waiting') {
     context.fillText('Appuie sur 6 pour commencer', WIDTH / 2, hintY);
   } else if (state.status === 'playing') {
@@ -192,7 +191,7 @@ export function mountGame(canvas, {onState = () => {}, view = {}, render = null}
     paint(state);
     if (state.status !== lastStatus) {
       lastStatus = state.status;
-      onState({...state}); // a copy, so the caller cannot alter our state
+      onState({...state}); 
     }
     frameId = requestAnimationFrame(frame);
   }
