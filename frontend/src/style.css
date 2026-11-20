@@ -1,0 +1,80 @@
+/* Clean palette: neutral page, orange as the main accent, pink for small details. */
+:root {
+  --bg: #ffffff;       /* page background */
+  --surface: #feb9e5;  /* panels */
+  --ink: #1f1d2b;      /* main text */
+  --muted: #896fff;    /* secondary text */
+  --line: #e4e0da;     /* borders */
+  --orange: #f21de7;   /* primary accent */
+  --orange-dark: #f21de7;
+  --pink: #e23c7a;     /* secondary accent */
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  color: var(--ink);
+  background: var(--bg);
+}
+* {box-sizing: border-box}
+body {margin: 0}
+main {max-width: 1320px; margin: auto; padding: 40px 24px}
+.eyebrow {color: var(--pink); font-weight: bold; letter-spacing: .2em; font-size: 12px; margin: 0 0 4px}
+h1 {font-size: clamp(36px, 5vw, 52px); letter-spacing: -.02em; margin: 0 0 8px; color: var(--ink)}
+h1::after {content: ''; display: block; width: 64px; height: 4px; margin-top: 10px; background: var(--orange)}
+h2 {font-size: 20px; margin-top: 0}
+p {line-height: 1.6; color: var(--muted)}
+
+.layout {display: grid; grid-template-columns: minmax(0, 960px) minmax(240px, 1fr); gap: 24px; align-items: start; margin-top: 24px}
+@media (max-width: 1200px) {.layout {grid-template-columns: 1fr}}
+
+/* Panels: thin border, small radius, no heavy shadows. */
+canvas, .setup, .leaderboard {border: 1px solid var(--line); border-radius: 12px}
+canvas {display: block; width: 100%; max-width: 960px; height: auto}
+
+.setup {display: grid; gap: 20px; padding: 24px; background: var(--surface)}
+.setup .name {display: grid; gap: 8px; font-weight: bold}
+.setup .name input {
+  font: inherit; font-size: 18px; padding: 10px 12px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+}
+.setup .name input:focus {border-color: var(--orange)}
+
+.characters {display: flex; gap: 16px; border: 0; padding: 0; margin: 0}
+.characters legend {font-weight: bold; margin-bottom: 8px}
+.card {
+  flex: 1; display: grid; justify-items: center; gap: 8px; padding: 14px; cursor: pointer;
+  border: 2px solid var(--line); border-radius: 10px; background: var(--surface);
+  transition: border-color .15s;
+}
+.card:hover {border-color: #cfc9c1}
+.card.selected {border-color: var(--orange); background: #fff6f0}
+.card input {position: absolute; opacity: 0}
+.card:has(input:focus-visible) {outline: 2px solid var(--orange); outline-offset: 3px}
+.card img {width: 110px; height: 130px; object-fit: contain}
+.card span {font-weight: bold}
+
+button {
+  font: inherit; font-weight: bold; color: white; cursor: pointer;
+  background: var(--orange); border: 0; border-radius: 8px; padding: 11px 20px;
+  transition: background .15s;
+}
+button:hover:not(:disabled) {background: var(--orange-dark)}
+button:disabled {opacity: .45; cursor: default}
+button.secondary {background: transparent; color: var(--ink); border: 1px solid var(--line)}
+button.secondary:hover:not(:disabled) {background: var(--surface); border-color: #cfc9c1}
+.controls {display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px}
+.who-plays {font-weight: bold; margin-top: 0; color: var(--ink)}
+#status {font-weight: bold; color: var(--ink)}
+.error {color: #c0392b; font-weight: bold}
+
+.leaderboard {padding: 20px 24px; background: var(--surface)}
+.leaderboard h2 {padding-bottom: 10px; border-bottom: 2px solid var(--orange)}
+.leaderboard ol {padding-left: 28px; margin: 0}
+.leaderboard li {padding: 6px 4px; border-bottom: 1px solid var(--line)}
+.leaderboard li:last-child {border-bottom: 0}
+.leaderboard li::marker {color: var(--muted)}
+.leaderboard li > span {display: inline-block}
+.leaderboard .name {min-width: 40%; font-weight: bold}
+.leaderboard .who {min-width: 30%; color: var(--muted)}
+.leaderboard .points {font-weight: bold; color: var(--orange)}
+.leaderboard li.mine {background: #fdeef4; border-radius: 6px}
+.leaderboard li.mine .points {color: var(--pink)}
+
+:focus-visible {outline: 2px solid var(--orange); outline-offset: 3px}
