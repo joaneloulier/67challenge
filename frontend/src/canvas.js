@@ -153,7 +153,7 @@ export function draw(context, state, view = {}) {
 
     context.fillStyle = COLORS.ink;
     context.font = font(20);
-    context.fillText('Clique sur Rejouer pour recommencer', WIDTH / 2, card.y + 268);
+    context.fillText('Appuie sur Entrée pour rejouer', WIDTH / 2, card.y + 268);
   }
   context.textAlign = 'left'; // context settings persist between frames
 }

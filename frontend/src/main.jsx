@@ -118,6 +118,20 @@ function App() {
     setGameKey(key => key + 1);
   }
 
+  // Enter = Rejouer, only while the end-of-game card is shown.
+  useEffect(() => {
+    if (!result) return; // no listener during a game or on the form
+    function onKey(event) {
+      if (event.key !== 'Enter' || event.repeat) return;
+      // A focused button already reacts to Enter with a click: avoid a double replay.
+      if (event.target.tagName === 'BUTTON') return;
+      event.preventDefault();
+      replay();
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey); // cleanup, like game.destroy()
+  }, [result]);
+
   return (
     <main>
       <p className="eyebrow">ECM · WEB 101</p>

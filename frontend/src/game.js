@@ -26,6 +26,7 @@ export function newGame() {
 
 // A key was pressed ('6' or '7'). Returns a NEW state; `previous` is untouched.
 export function press(previous, key) {
+  if (key == 'Enter') return ;
   if (key !== '6' && key !== '7') return previous;
   if (previous.status === 'over') return previous;
 
